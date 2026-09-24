@@ -129,12 +129,37 @@ print(computer.brand, computer.cpu.model)
 
 # Part H - Applied challange: Export system
 class Exporter:
-    # def __init__(self):
-    #     pass
     def export(self, data):
         self.data = data
-
+        return data
 class ConsoleExporter:
-    # What should these export methids return - fråga Aladdin
+    def export(self, data):
+        self.data = data
+        return "Console: " + data
+    def __str__(self):
+        return self.export(self.data)
 class TextExporter:
+    def export(self, data):
+        self.data = data
+        return "Text: " + data
+    def __str__(self):
+        return self.export(self.data)
 class SummaryExporter:
+    def export(self, data):
+        self.data = data
+        return "Summary: " + data
+    def __str__(self):
+        return self.export(self.data)
+
+console = ConsoleExporter()
+report1 = console.export("Customer report")
+text = TextExporter()
+report2 = text.export("Manager report")
+summary = SummaryExporter()
+report3 = summary.export("summary report")
+
+reports = [report1, report2, report3]
+
+for report in reports:
+    print(report)
+
