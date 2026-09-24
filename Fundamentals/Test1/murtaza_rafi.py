@@ -3,7 +3,7 @@
 # ==================================================
 
 products = [
-    {"name": "Laptop", "price": 12000, "stock": 4},
+    {"name": "Laptop", "price": 12000, "stock": 0},
     {"name": "Mouse", "price": 350, "stock": 0},
     {"name": "Keyboard", "price": 800, "stock": 6},
     {"name": "Monitor", "price": 3200, "stock": 3},
@@ -23,7 +23,8 @@ for product in products:
 def get_total(products):
     total = 0
     for product in products:
-        total += product["price"] * product["stock"]
+        if product["stock"] > 0:
+            total += product["price"] * product["stock"]
 
     return total
 # 4. Print the total value.
@@ -35,12 +36,12 @@ def get_highest(products):
     highest = 0
     highest_product = products[0]
     for product in products:
-        if product["price"] > highest:
+        if product["price"] > highest and product["stock"] > 0:
             highest = product["price"]
             highest_product = product
     return highest_product
 
-print(get_highest(products))
+print("highest price:", get_highest(products))
 
 # Write your solution below:
 
@@ -147,7 +148,7 @@ players = [
     {"name": " sara ", "score": 94, "active": True},
     {"name": "LEO", "score": 67, "active": True},
     {"name": " emma", "score": 88, "active": True},
-    {"name": "OSCAR ", "score": 76, "active": False}
+    {"name": "OSCAR ", "score": 81, "active": False}
 ]
 
 # 1. Create a new list containing normalized player names.
@@ -186,7 +187,7 @@ players = [
 normalized_names = [player["name"].strip().capitalize() for player in players]
 
 # 2.
-active_players = [player for player in players if player["score"] >= 80]
+active_players = [player for player in players if player["score"] >= 80 and player["active"]]
 print(active_players)
 
 # 3.
@@ -194,8 +195,8 @@ sorted_players = sorted(players, key=lambda player: player["score"], reverse=Tru
 print(sorted_players)
 
 # 4.
-for ranking, player in enumerate(sorted_players):
-    print(ranking, player)
+for ranking, player in enumerate(sorted_players, start = 1):
+    print(f"{ranking}. {player["name"]} - {player["score"]}")
 
 # 5
 scores = [player["score"] for player in players]
