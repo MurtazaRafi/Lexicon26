@@ -132,19 +132,19 @@ class Exporter:
     def export(self, data):
         self.data = data
         return data
-class ConsoleExporter:
+class ConsoleExporter(Exporter):
     def export(self, data):
         self.data = data
         return "Console: " + data
     def __str__(self):
         return self.export(self.data)
-class TextExporter:
+class TextExporter(Exporter):
     def export(self, data):
         self.data = data
         return "Text: " + data
     def __str__(self):
         return self.export(self.data)
-class SummaryExporter:
+class SummaryExporter(Exporter):
     def export(self, data):
         self.data = data
         return "Summary: " + data
@@ -152,14 +152,54 @@ class SummaryExporter:
         return self.export(self.data)
 
 console = ConsoleExporter()
-report1 = console.export("Customer report")
+# report1 = console.export("Customer report")
 text = TextExporter()
-report2 = text.export("Manager report")
+# report2 = text.export("Manager report")
 summary = SummaryExporter()
-report3 = summary.export("summary report")
+# report3 = summary.export("summary report")
 
-reports = [report1, report2, report3]
+reports = [console, text, summary]
 
 for report in reports:
-    print(report)
+    print(report.export("Some file data"))
 
+# 8
+class Graph:
+    def export(self, data):
+        self.data = data
+        return "Graph: " + data
+    def __str__(self):
+        return self.export(self.data)
+
+graph = Graph()
+new_list = [*reports, graph]
+
+
+for report in new_list:
+    print(report.export("Some file data"))
+
+# 9
+print(isinstance(console, Exporter))
+
+# 10
+
+class StapleDiagram:
+    def __init__(self, title):
+        self.title = title
+    def __str__(self):
+        return self.title
+
+staple_diagram = StapleDiagram("Graph 1")
+
+class Graph2:
+    def export(self, data, staple_diagram):
+        self.data = data
+        self.staple_diagram = staple_diagram
+        return "Graph: " + data
+    def __str__(self):
+        return self.export(self.data) 
+
+graph2 = Graph2()
+print(graph2.export("Some data", staple_diagram))
+print(graph2.staple_diagram)
+# Explanation: A graph can have different types of graphs, among others staple diagram
