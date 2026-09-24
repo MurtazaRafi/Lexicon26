@@ -16,7 +16,8 @@ for product in products:
     print(product)
 # 2. Print the name of every product that is in stock.
 for product in products:
-    print(product["name"])
+    if product["stock"] > 0:
+        print(product["name"])
 
 # 3. Calculate the total value of all products in stock.
 #    The value of a product is price * stock.
