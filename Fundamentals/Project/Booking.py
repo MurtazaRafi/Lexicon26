@@ -6,3 +6,10 @@ class Booking:
         self.to_date = to_date
         self.customer = customer
         self.room = room
+    def __str__(self):
+        return "\n".join(["BOOKING INOFRMATION", 
+                         f"booking ID: {self.booking_ID}", 
+                         f"booked from: {self.from_date}",
+                         f"booked to: {self.to_date}",
+                         f"customer: {self.customer.name}",
+                         f"room number: {self.room}"])

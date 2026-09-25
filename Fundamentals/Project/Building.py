@@ -1,6 +1,7 @@
 
 class Building:
-    def __init__(self, floors = None):
+    def __init__(self, address, floors = None):
+        self.address = address
         if floors is None:
             self.floors = []
         self.floors = floors
