@@ -9,4 +9,4 @@ class Building:
     def add_floor(self, floor):
         self.floors = self.floors.append(floor)
     def get_status(self):
-        return f"Occupied floors: {[floor.floor_number for floor in self.floors]}"
+        return f"Occupied floors: {", ".join([str(floor.floor_number) for floor in self.floors])}"
