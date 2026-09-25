@@ -23,7 +23,13 @@ print(booking1)
 print(building.get_status())
 print(floor.get_status())
 
-# Create 100 free spaces in one building contianing 10 floors each containing 10 rooms 
+# Create 100 free spaces in one building contianing 10 floors each containing 10 rooms - genom att ha/Sätta MAX_ROOMS = 10 i classen ??
 
+
+# How can I check (without considering the dates) if one room is full or not?
+
+#floor.add_room(room=room)
+
+# create some more rooms in this floor
 
 

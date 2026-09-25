@@ -8,6 +8,8 @@ class Floor:
             self.rooms = []
         self.rooms = rooms
     def add_room(self, room):
+        if room in self.rooms:
+            raise ValueError("Room is already occupied!")
         self.rooms = self.rooms.append(room)
     def get_status(self):
         return self.rooms
