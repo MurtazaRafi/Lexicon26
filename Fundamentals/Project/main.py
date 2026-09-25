@@ -10,17 +10,20 @@ from Room import Room
 
 
 # Create data
-
-room = Room(2)
-
+room = Room(room_number=2)
 print(room.room_number)
-
-floor = Floor(floor_number=1, rooms=room)
-
-building = Building("Götgatan 2", floor)
-
+floor = Floor(floor_number=1, rooms=[room])
+building = Building("Götgatan 2", floors=[floor])
 customer = Customer(1, "Murtaza Rafi", 33)
-
 booking1 = Booking(booking_ID=1, created_at_date="2026-09-25:22:30", from_date="2026-09-25:00:00", to_date="2026-09-27:00:00", customer=customer, room=room)
 
 print(booking1)
+
+# Get stutus of the building and the floor
+print(building.get_status())
+print(floor.get_status())
+
+# Create 100 free spaces in one building contianing 10 floors each containing 10 rooms 
+
+
+
