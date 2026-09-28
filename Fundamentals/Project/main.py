@@ -93,6 +93,7 @@ print(floor5.get_status())
 
 
 
+
 start_date = "2026-09-28"
 # TODO extra funtkiolitet i mån av tid !
 
