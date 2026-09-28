@@ -62,22 +62,37 @@ print(rooms[0]["room"])
 # room11 = Room(1)
 # floor3.add_room(room11)
 
+
+
+# TODO extra (i mån av tid) bryt ut customers till repository eller alla tre i en reporsitory som repo.csutomers.add() remove etc
+addresses = []
+customers = []
+bookings = []
+
+
 # Remove one room from floor3
 floor3.remove_room(rooms[0]["room"])
 rooms[0]["room"].vacate()
 
+
 building1 = Building("Hagavägen 1")
+
+
 building1.add_floor(floor=floor3)
 
 print(building1.get_status())
 print(floor3.get_status())
 
 customer1 = Customer(100, "Murtaza rafi", 33)
-address1 = Address(building1, floor3, room=rooms[3]["room"])
+customers.append(customer1)
 
+address1 = Address(building1, "1001", floor3, room=rooms[3]["room"])
+addresses.append(address1)
 
 
 booking1 = Booking(1, "2026-09-28:9:30", "2026-09-28:00:00", "2026-09-29:00:00", customer1, address1)
+bookings.append(booking1)
+
 # TODO Bryt ut till metoder/funktioner
 print(booking1)
 
@@ -92,12 +107,78 @@ print(floor3.get_status())
 print(floor5.get_status())
 
 
+def run_menu():
+    print(f"""MAIN MENU: Please choose an option:
+    1. Add information
+    2. Remove information
+    3. See current status
+    4. Generate data/'Fill rooms'""")
+    main_menu_input = input()
+
+    match main_menu_input:
+        case "1": 
+            print(f"""What do you want to add?
+            1. Add address
+            2. Add customer
+            3. Add a booking""")
+        case "2":
+            print(f"""What do you want to remove?
+            1. Remove address
+            2. Remove customer
+            3. Remove a booking""")
+            user_input = input()
+            entity = get_by_choice(user_input)
+
+            remove_entity(entity)
+        case "3":
+            print(f"""See current status for
+            1. Addresses
+            2. Customers
+            3. Bookings""")
+            view_input = input()
+            if view_input == "1":
+                print("This is list of current addresses in the system: ")
+                for address in addresses:
+                    print(address)
+            elif view_input == "2":
+                print("This is list of current customers in the system: ")
+                for customer in customers:
+                    print(customer)
+            elif view_input == "3":
+                print("This is list of current bookings in the system: ")
+                for booking in bookings:
+                    print(booking)
+
+run_menu()
+
+def get_by_choice(user_input):
+    if user_input == "1":
+        return "address"
+    elif user_input == "2":
+        return "customer"
+    elif user_input == "3":
+        return "booking"
+
+# kan använda inheritence + polymorf för att get customer by id tex
+def remove_entity(enitity):
+    if enitity == 'address':
+        address = input("Please provide the address you want to remove!: ")
+    elif enitity == 'customer':
+        remove_ID = input(f"Please provide ID for customer: ")
+        #remove_customer_by_ID(customer_ID = remove_ID)
+        pass
+
+    elif enitity == 'booking':
+        pass
+
+# Bryt ut till en BookingRepository med CRUD funktionalitet
+
+# get_customer_by_ID(customer_ID)
 
 
-start_date = "2026-09-28"
+
+#start_date = "2026-09-28"
 # TODO extra funtkiolitet i mån av tid !
 
 # add depending on the dates
 # om det sepcifika rummet ej bokat under den tiden
-#
-#
