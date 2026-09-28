@@ -1,6 +1,4 @@
 
-from Room import Room
-
 class Floor:
     def __init__(self, floor_number, rooms = None):
         self.floor_number = floor_number

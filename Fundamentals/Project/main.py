@@ -1,6 +1,8 @@
 # Gör den här filen till en read me
 # Om att det här är en project om "hotel booknings system" i python.
 # This file works as a booking manager. Handles the bookings and interaction of the entities between eachother
+from sqlite3 import Date
+
 from Customer import Customer
 from Booking import Booking
 from Address import Address
@@ -47,6 +49,7 @@ rooms = [{"room" : "room1", "room_number": 1}, {"room" : "room2", "room_number":
          {"room" : "room4", "room_number": 4},{"room" : "room5", "room_number": 5},{"room" : "room6", "room_number": 6},
          {"room" : "room7", "room_number": 7},{"room" : "room8", "room_number": 8},{"room" : "room9", "room_number": 9},{"room" : "room10", "room_number": 10}]
 
+# TODO kan ha denna logik innuti floor och samma med buidling
 floor3 = Floor(floor_number=3) # Ej rätt ! room kan läggas till
 for room in rooms:
     room["room"] = Room(room["room_number"])
@@ -72,9 +75,28 @@ print(floor3.get_status())
 customer1 = Customer(100, "Murtaza rafi", 33)
 address1 = Address(building1, floor3, room=rooms[3]["room"])
 
+
+
 booking1 = Booking(1, "2026-09-28:9:30", "2026-09-28:00:00", "2026-09-29:00:00", customer1, address1)
-# Bättre att bryta ut till en location eller address i ett objekt - för att nu man saknar info i booking om addressen ! 
-# TODO Bryt ut till 1 objekt för addressen
+# TODO Bryt ut till metoder/funktioner
 print(booking1)
 
-# TODO Lägg till fler data med for loops + fixa while loop för vad man vill göra med menyer
+# TODO Lägg till fler data med for loops + fixa while loop för vad man vill göra med menyer med inmatning input()
+
+room11 = Room(10, 2000, True)
+floor5 = Floor(5, [room11])
+building1.add_floor(floor5)
+
+print(building1.get_status())
+print(floor3.get_status())
+print(floor5.get_status())
+
+
+
+start_date = "2026-09-28"
+# TODO extra funtkiolitet i mån av tid !
+
+# add depending on the dates
+# om det sepcifika rummet ej bokat under den tiden
+#
+#
