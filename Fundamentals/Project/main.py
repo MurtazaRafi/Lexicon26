@@ -1,7 +1,7 @@
 # Gör den här filen till en read me
 # Om att det här är en project om "hotel booknings system" i python.
 # This file works as a booking manager. Handles the bookings and interaction of the entities between eachother
-from sqlite3 import Date
+# from sqlite3 import Date
 
 from Customer import Customer
 from Booking import Booking
@@ -108,48 +108,51 @@ print(floor5.get_status())
 
 
 def run_menu():
-    print(f"""MAIN MENU: Please choose an option:
-    1. Add information
-    2. Remove information
-    3. See current status
-    4. Generate data/'Fill rooms'""")
-    main_menu_input = input()
+    while (True):
+        print(f"""MAIN MENU: Please choose an option:
+        0. Quick menu
+        1. Add information
+        2. Remove information
+        3. See current status
+        4. Generate data/'Fill rooms'""")
 
-    match main_menu_input:
-        case "1": 
-            print(f"""What do you want to add?
-            1. Add address
-            2. Add customer
-            3. Add a booking""")
-        case "2":
-            print(f"""What do you want to remove?
-            1. Remove address
-            2. Remove customer
-            3. Remove a booking""")
-            user_input = input()
-            entity = get_by_choice(user_input)
+        main_menu_input = input()
 
-            remove_entity(entity)
-        case "3":
-            print(f"""See current status for
-            1. Addresses
-            2. Customers
-            3. Bookings""")
-            view_input = input()
-            if view_input == "1":
-                print("This is list of current addresses in the system: ")
-                for address in addresses:
-                    print(address)
-            elif view_input == "2":
-                print("This is list of current customers in the system: ")
-                for customer in customers:
-                    print(customer)
-            elif view_input == "3":
-                print("This is list of current bookings in the system: ")
-                for booking in bookings:
-                    print(booking)
-
-run_menu()
+        match main_menu_input:
+            case "0":
+                break
+            case "1": 
+                print(f"""What do you want to add?
+                1. Add address
+                2. Add customer
+                3. Add a booking""")
+            case "2":
+                print(f"""What do you want to remove?
+                1. Remove address
+                2. Remove customer
+                3. Remove a booking""")
+                user_input = input()
+                entity = get_by_choice(user_input)
+                remove_entity(entity)
+            case "3":
+                print(f"""See current status for
+                1. Addresses
+                2. Customers
+                3. Bookings""")
+                view_input = input()
+                if view_input == "1":
+                    print("This is list of current addresses in the system: ")
+                    for address in addresses:
+                        print(address)
+                        # print(building1.get_status())
+                elif view_input == "2":
+                    print("This is list of current customers in the system: ")
+                    for customer in customers:
+                        print(customer)
+                elif view_input == "3":
+                    print("This is list of current bookings in the system: ")
+                    for booking in bookings:
+                        print(booking)
 
 def get_by_choice(user_input):
     if user_input == "1":
@@ -162,7 +165,10 @@ def get_by_choice(user_input):
 # kan använda inheritence + polymorf för att get customer by id tex
 def remove_entity(enitity):
     if enitity == 'address':
-        address = input("Please provide the address you want to remove!: ")
+        input_address = input("Please provide the address you want to remove!: ")
+        for address in addresses:
+            if address == input_address:
+                addresses.remove(address)
     elif enitity == 'customer':
         remove_ID = input(f"Please provide ID for customer: ")
         #remove_customer_by_ID(customer_ID = remove_ID)
@@ -171,6 +177,22 @@ def remove_entity(enitity):
     elif enitity == 'booking':
         pass
 
+
+# add one more customer
+customer2 = Customer(2, "Anders Eriksson", 50)
+customers.append(customer2)
+
+address2 = Address("Hagavägen 1", 1, 2, 3)
+addresses.append(address2)
+
+booking2 = Booking(2, "2026-09-28:9:30", "2026-09-28:9:30", "2026-09-28:9:30", customer2, address1)
+bookings.append(booking2)
+
+run_menu()
+
+
+# TODO Kan också lägga till statistik också, antal ockuperade rum i byggnaden tex, antal customers och så vidare. pric etc
+# TODO i mån av tid
 # Bryt ut till en BookingRepository med CRUD funktionalitet
 
 # get_customer_by_ID(customer_ID)
