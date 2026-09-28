@@ -3,3 +3,5 @@ class Customer:
         self.customer_ID = customer_ID
         self.name = name
         self.age = age
+    def __str__(self):
+        return self.name

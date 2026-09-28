@@ -18,9 +18,9 @@ class Floor:
         print(self.rooms)
     def remove_room(self, room):
             if room not in self.rooms:
-                raise ValueError("Room deos not exist in this floor!")
+                raise ValueError("Room does not exist in this floor!")
             self.rooms.remove(room)
     def __str__(self):
-        return self.floor_number
+        return str(self.floor_number)
     def get_status(self):   
         return f"Occupied rooms at floor number {self.floor_number}: {", ".join([str(room.room_number) for room in self.rooms])}"

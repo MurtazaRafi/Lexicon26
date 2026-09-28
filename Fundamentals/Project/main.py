@@ -3,6 +3,7 @@
 # This file works as a booking manager. Handles the bookings and interaction of the entities between eachother
 from Customer import Customer
 from Booking import Booking
+from Address import Address
 from Room import Room
 from Building import Building
 from Floor import Floor
@@ -60,6 +61,20 @@ print(rooms[0]["room"])
 
 # Remove one room from floor3
 floor3.remove_room(rooms[0]["room"])
+rooms[0]["room"].vacate()
+
+building1 = Building("Hagavägen 1")
+building1.add_floor(floor=floor3)
+
+print(building1.get_status())
 print(floor3.get_status())
+
+customer1 = Customer(100, "Murtaza rafi", 33)
+address1 = Address(building1, floor3, room=rooms[3]["room"])
+
+booking1 = Booking(1, "2026-09-28:9:30", "2026-09-28:00:00", "2026-09-29:00:00", customer1, address1)
+# Bättre att bryta ut till en location eller address i ett objekt - för att nu man saknar info i booking om addressen ! 
+# TODO Bryt ut till 1 objekt för addressen
+print(booking1)
 
 # TODO Lägg till fler data med for loops + fixa while loop för vad man vill göra med menyer
