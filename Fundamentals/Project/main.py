@@ -83,7 +83,7 @@ building1.add_floor(floor=floor3)
 # print(building1.get_status())
 print(floor3.get_status())
 
-customer1 = Customer(100, "Murtaza rafi", 33)
+customer1 = Customer(1, "Murtaza rafi", 33)
 customers.append(customer1)
 
 address1 = Address(building1, 1 , floor3, room=rooms[3]["room"])
@@ -99,12 +99,12 @@ print(booking1)
 # TODO Lägg till fler data med for loops + fixa while loop för vad man vill göra med menyer med inmatning input()
 
 room11 = Room(10, 2000, True)
-floor5 = Floor(5, [room11])
-building1.add_floor(floor5)
+# floor5 = Floor(5, [room11])
+# building1.add_floor(floor5)
 
 # print(building1.get_status())
 print(floor3.get_status())
-print(floor5.get_status())
+# print(floor5.get_status())
 
 
 def run_menu():
@@ -123,9 +123,12 @@ def run_menu():
                 break
             case "1": 
                 print(f"""What do you want to add?
-                1. Add address
-                2. Add customer
-                3. Add a booking""")
+            1. Add address
+            2. Add customer
+            3. Add a booking""")
+                user_input = input()
+                entity = get_by_choice(user_input)
+                add_entity(entity)
             case "2":
                 print(f"""What do you want to remove?
                 1. Remove address
@@ -148,9 +151,9 @@ def run_menu():
                 elif view_input == "2":
                     previous_address = ""
                     for address in addresses:
-                        if address.building != previous_address:
-                            print(address.get_building_info())
-                        previous_address = address.building
+                        # if address.building != previous_address:
+                        print(address.get_building_info())
+                        # previous_address = address.building
                 elif view_input == "3":
                     print("This is list of current customers in the system: ")
                     for customer in customers:
@@ -177,20 +180,70 @@ def remove_entity(enitity):
                 addresses.remove(address)
     elif enitity == 'customer':
         remove_ID = input(f"Please provide ID for customer: ")
-        #remove_customer_by_ID(customer_ID = remove_ID)
-        pass
-    elif enitity == 'booking':
-        pass
+        found_customer = find_customer(remove_ID)
 
+        if not found_customer:
+            raise ValueError("No such customer exists!")
+        customers.remove(found_customer)
+        #remove_customer_by_ID(customer_ID = remove_ID)
+    elif enitity == 'booking':
+        remove_ID = input(f"Please provide booking ID: ")
+        found_booking = find_booking(remove_ID)
+
+        if not found_booking:
+            raise ValueError("No such booking exists!")
+        bookings.remove(found_booking)
+
+def add_entity(entity):
+    if entity == 'address':
+        input_address = input("Please provide the address you want to add: ")
+        # Address() # TODO Fixa så att blir rätt
+    elif entity == 'customer':
+        id = input("Give customer ID: ")
+        name = input("Give customer name: ")
+        age = input("Give customer age: ")
+        customer = Customer(id, name, age)
+        customers.append(customer)
+    elif entity == 'booking':
+        booking_ID = input("Give booking ID: ")
+        created_at_date = "2026-09-29:10:00"
+        from_date = input("Give from date: ")
+        to_date = input("Give to date: ")
+        customer_ID = input("Give customer ID: ")
+        found_customer = find_customer(customer_ID)
+        address_id = input("Give address id: ")
+        found_address = find_address(address_id)
+        booking = Booking(booking_ID, created_at_date, from_date, to_date, found_customer, found_address)
+        bookings.append(booking)
+def find_booking(booking_ID):
+    for b in bookings:
+        if str(b.booking_ID) == booking_ID:
+            return b    
+    return None
+def find_customer(customer_ID):
+    for c in customers:
+        if str(c.customer_ID) == customer_ID:
+            return c
+    return None
+def find_address(address_id):
+    for a in addresses:
+        if str(a.address_ID) == address_id:
+            return a
+    return None
 
 # add one more customer
 customer2 = Customer(2, "Anders Eriksson", 50)
 customers.append(customer2)
 
-address2 = Address(building1, 1, 2, 3)
+floor5 = Floor(5)
+room5 = Room(5)
+floor5.add_room(room5)
+room5.occupy()
+floor5.add_room2(10)
+address2 = Address(building1, 1, floor5, room5)
 addresses.append(address2)
 
-booking2 = Booking(2, "2026-09-28:9:30", "2026-09-28:9:30", "2026-09-28:9:30", customer2, address1)
+booking2 = Booking(2, "2026-09-28:9:30", "2026-09-28:9:30", "2026-09-28:9:30", customer2, address2)
 bookings.append(booking2)
 
 run_menu()

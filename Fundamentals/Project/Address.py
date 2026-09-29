@@ -1,9 +1,10 @@
 from Building import Building
 from Floor import Floor
+from Room import Room
 
 
 class Address:
-    def __init__(self, building : Building, address_ID, floor :Floor, room):
+    def __init__(self, building : Building, address_ID, floor : Floor, room : Room):
         self.address_ID = address_ID
         self.building = building
         self.floor = floor
@@ -14,11 +15,11 @@ class Address:
         output = f"Occupied floors at building {self.building}: "
 
         for floor in self.building.floors:
-            output += str(floor.floor_number) + ", "
+            output += str(floor.floor_number) + " "
 
         output += f"\nOccupied rooms at floor number {self.floor.floor_number}: "
 
         for room in self.floor.rooms:
-            output += str(room.room_number) + ", "
-            
+            output += str(room.room_number) + " "
+
         return output
