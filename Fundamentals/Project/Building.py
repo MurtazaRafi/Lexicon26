@@ -11,7 +11,7 @@ class Building:
         if len(self.floors) >= self.MAX_FLOORS:
             raise ValueError("Maximum number of floors reached!")
         self.floors.append(floor)
-    def get_status(self):
-        return f"Occupied floors at building {self.address}: {", ".join([str(floor.floor_number) for floor in self.floors])}"
     def __str__(self):
         return self.address
+    def get_status(self):
+        return f"Occupied floors at building {self.address}: {", ".join([str(floor.floor_number) for floor in self.floors])}"

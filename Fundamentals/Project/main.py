@@ -80,13 +80,13 @@ building1 = Building("Hagavägen 1")
 
 building1.add_floor(floor=floor3)
 
-print(building1.get_status())
+# print(building1.get_status())
 print(floor3.get_status())
 
 customer1 = Customer(100, "Murtaza rafi", 33)
 customers.append(customer1)
 
-address1 = Address(building1, "1001", floor3, room=rooms[3]["room"])
+address1 = Address(building1, 1 , floor3, room=rooms[3]["room"])
 addresses.append(address1)
 
 
@@ -102,7 +102,7 @@ room11 = Room(10, 2000, True)
 floor5 = Floor(5, [room11])
 building1.add_floor(floor5)
 
-print(building1.get_status())
+# print(building1.get_status())
 print(floor3.get_status())
 print(floor5.get_status())
 
@@ -137,19 +137,25 @@ def run_menu():
             case "3":
                 print(f"""See current status for
                 1. Addresses
-                2. Customers
-                3. Bookings""")
+                2. Buildings
+                3. Customers
+                4. Bookings""")
                 view_input = input()
                 if view_input == "1":
                     print("This is list of current addresses in the system: ")
                     for address in addresses:
                         print(address)
-                        # print(building1.get_status())
                 elif view_input == "2":
+                    previous_address = ""
+                    for address in addresses:
+                        if address.building != previous_address:
+                            print(address.get_building_info())
+                        previous_address = address.building
+                elif view_input == "3":
                     print("This is list of current customers in the system: ")
                     for customer in customers:
                         print(customer)
-                elif view_input == "3":
+                elif view_input == "4":
                     print("This is list of current bookings in the system: ")
                     for booking in bookings:
                         print(booking)
@@ -173,7 +179,6 @@ def remove_entity(enitity):
         remove_ID = input(f"Please provide ID for customer: ")
         #remove_customer_by_ID(customer_ID = remove_ID)
         pass
-
     elif enitity == 'booking':
         pass
 
@@ -182,7 +187,7 @@ def remove_entity(enitity):
 customer2 = Customer(2, "Anders Eriksson", 50)
 customers.append(customer2)
 
-address2 = Address("Hagavägen 1", 1, 2, 3)
+address2 = Address(building1, 1, 2, 3)
 addresses.append(address2)
 
 booking2 = Booking(2, "2026-09-28:9:30", "2026-09-28:9:30", "2026-09-28:9:30", customer2, address1)
