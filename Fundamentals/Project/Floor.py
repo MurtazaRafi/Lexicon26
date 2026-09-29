@@ -16,13 +16,13 @@ class Floor:
         if len(self.rooms) >= self.MAX_ROOMS:
             raise ValueError("Maximum number of rooms reached!")
         self.rooms.append(room)
-    def add_room2(self, room_number):
-            for r in self.rooms:
-                if(room_number == r.room_number):
-                    raise ValueError("Room is already occupied!")
-            room = Room(room_number)
-            self.rooms.append(room)
-            room.occupy()
+    # def add_room2(self, room_number):
+    #         for r in self.rooms:
+    #             if(room_number == r.room_number):
+    #                 raise ValueError("Room is already occupied!")
+    #         room = Room(room_number)
+    #         self.rooms.append(room)
+    #         room.occupy()
     def remove_room(self, room):
             if room not in self.rooms:
                 raise ValueError("Room does not exist in this floor!")
