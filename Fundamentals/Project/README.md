@@ -2,7 +2,7 @@
 ## This is a console application project built in Python. It utilizes the Python fundamentals concepts. 
 ### How to run the application
 You run the application by
-1) Cloning the project/downloading it from Github at "https://github.com/MurtazaRafi/Lexicon26/edit/main/Fundamentals/Project"
+1) Cloning the project/downloading it from Github at "https://github.com/MurtazaRafi/Lexicon26/tree/main/Fundamentals/Project"
 2) Navigating to the main.py file and running it in for example Visual Studio Code.
 3) Alternatively you can also run this file directly in the terminal window as well!
 ### About the app
