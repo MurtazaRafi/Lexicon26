@@ -104,7 +104,6 @@ def remove_entity(enitity):
         bookings.remove(found_booking)
 
 def add_entity(entity):
-
     if entity == 'address':
         input_address = input("Please provide the address you want to add: ")
         address_ID = input("Please provide the address ID: ")
@@ -114,7 +113,6 @@ def add_entity(entity):
         room = Room(room_number, 4000, True)
         address = Address(input_address, address_ID, floor, room)
         addresses.append(address)
-        # Address() # TODO Fixa så att blir rätt
     elif entity == 'customer':
         id = input("Give customer ID: ")
         name = input("Give customer name: ")
@@ -149,21 +147,20 @@ def find_address(address_id):
     return None
 
 def generate_data():
+
+    building1 = Building("Haga National Park Hotel")
+    building2 = Building("Vanadis Hotel")
+    building3 = Building("Harbor Plaza Hotel")
+
     rooms = [{"room" : "room1", "room_number": 1}, {"room" : "room2", "room_number": 2}, {"room" : "room3", "room_number": 3},
              {"room" : "room4", "room_number": 4},{"room" : "room5", "room_number": 5},{"room" : "room6", "room_number": 6},
              {"room" : "room7", "room_number": 7},{"room" : "room8", "room_number": 8},{"room" : "room9", "room_number": 9},{"room" : "room10", "room_number": 10}]
     floors = [{"floor" : "floor1", "floor_number": 1}, {"floor" : "floor2", "floor_number": 2}, {"floor" : "floor3", "floor_number": 3},
              {"floor" : "floor4", "floor_number": 4},{"floor" : "floor5", "floor_number": 5},{"floor" : "floor6", "floor_number": 6},
              {"floor" : "floor7", "floor_number": 7},{"floor" : "floor8", "floor_number": 8},{"floor" : "floor9", "floor_number": 9},{"floor" : "floor10", "floor_number": 10}]
-    # # TODO kan ha denna logik innuti floor och samma med buidling
 
     for room in rooms:
         room["room"] = Room(room["room_number"])
-    
-    building1 = Building("Haga National Park Hotel")
-    building2 = Building("Vanadis Hotel")
-    building3 = Building("Harbor Plaza Hotel")
-
 
     for floor in floors:
         floor["floor"] = Floor(floor["floor_number"])
@@ -181,6 +178,7 @@ def generate_data():
     for customer in customers_list:
         customers.append(customer)
 
+    # Create 5 addresses with corresponding booking
     floors[2]["floor"].add_room(rooms[2]["room"])
     building1.add_floor(floors[2]["floor"])
     address1 = Address(building1, 1 , floors[2]["floor"], room=rooms[2]["room"])
@@ -227,15 +225,11 @@ def generate_data():
     print("Test Data generated.")
 
 run_menu()
+
 # TODO Kan också lägga till statistik också, antal ockuperade rum i byggnaden tex, antal customers och så vidare. pric etc plus sortering tex på customer name
 # TODO i mån av tid
 # Bryt ut till en BookingRepository med CRUD funktionalitet
 
-# get_customer_by_ID(customer_ID)
-
-
-
-#start_date = "2026-09-28"
 # TODO extra funtkiolitet i mån av tid !
 
 # add depending on the dates
