@@ -12,9 +12,10 @@ You can either
 2. Delete
 3. Show current stored data
 4. Generate test data
-<img width="170" height="68" alt="image" src="https://github.com/user-attachments/assets/a6f5603f-5348-4d09-bcf1-68c6f53b7e83" />
+
+<img width="263" height="112" alt="image" src="https://github.com/user-attachments/assets/f1ea32a5-4f2b-4582-8fb5-5590b7d45d31" />
 For each first three options you can add/remove/show info about the different datas/objects. If one for example chooses 3. in the main menu following is whown:
-<img width="134" height="50" alt="image" src="https://github.com/user-attachments/assets/afd4344e-5abf-415f-b688-22acebc34ed6" />
+<img width="308" height="92" alt="image" src="https://github.com/user-attachments/assets/1f119acf-4715-4536-81fe-bf5bc8fbf92b" />
 
 * The main.py file works as a "booking manager", where data for addresses, customers and bookings are stored in lists.
 * Handles the add/delete functionally of these entities and interaction of the entities between them
