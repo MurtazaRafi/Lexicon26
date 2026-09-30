@@ -1,8 +1,3 @@
-# Gör den här filen till en read me
-# Om att det här är en project om "hotel booknings system" i python.
-# This file works as a booking manager. Handles the bookings and interaction of the entities between eachother
-# from sqlite3 import Date
-
 from Customer import Customer
 from Booking import Booking
 from Address import Address
@@ -11,7 +6,6 @@ from Building import Building
 from Floor import Floor
 from Room import Room
 
-# TODO extra (i mån av tid) bryt ut customers till repository eller alla tre i en reporsitory som repo.csutomers.add() remove etc
 addresses = []
 customers = []
 bookings = []
@@ -24,7 +18,8 @@ def run_menu():
         1. Add information
         2. Remove information
         3. See current status
-        4. Generate data/'Fill rooms'""")
+        4. Generate test data
+        5. Show statistics""")
 
         main_menu_input = input()
 
@@ -48,11 +43,7 @@ def run_menu():
                 entity = get_by_choice(user_input)
                 remove_entity(entity)
             case "3":
-                print(f"""See current status for
-                1. Addresses
-                2. Buildings
-                3. Customers
-                4. Bookings""")
+                print("See current status for: \n1. Addresses \n2. Buildings \n3. Customers \n4. Bookings")
                 view_input = input()
                 if view_input == "1":
                     print("List  of current (occupied) addresses in the system: ")
@@ -72,8 +63,31 @@ def run_menu():
                         print(booking)
             case "4":
                 generate_data()
+            case "5":
+                get_statistics()
 
+def get_statistics():
+    print("""Which of the following do you want to know statistical data about?: \n1. Addresses \n2. Customers \n3. Bookings \n4. Buildings""")
+    user_input = input()
+    entity = get_by_choice(user_input)
+    if entity == 'address':
+        print("Number of addresses:", len(addresses))
+        print("Number of occupied addresses:", len(bookings))
+        print("Number of free addresses:", len(addresses) - len(bookings))
+    elif entity == 'building':
+        print("Number of rooms occupied at each building/address: ")
+        count = {}
+        for address in addresses:
+            if str(address.building) not in count:
+                count[str(address.building)] = 0
+            count[str(address.building)] += 1
+        for key, val in count.items():
+            print(key, val) 
 
+    elif entity == 'customer':
+        print("Total number of customers:", len(customers))
+    elif entity == 'booking': 
+        print("Total number of bookings:", len(bookings))
 def get_by_choice(user_input):
     if user_input == "1":
         return "address"
@@ -81,21 +95,22 @@ def get_by_choice(user_input):
         return "customer"
     elif user_input == "3":
         return "booking"
+    elif user_input == "4":
+        return "building"
 
-# kan använda inheritence + polymorf för att get customer by id tex
-def remove_entity(enitity):
-    if enitity == 'address':
+def remove_entity(entity):
+    if entity == 'address':
         input_address = input("Please provide the address you want to remove!: ")
         for address in addresses:
             if address == input_address:
                 addresses.remove(address)
-    elif enitity == 'customer':
+    elif entity == 'customer':
         remove_ID = input(f"Please provide ID for customer: ")
         found_customer = find_customer(remove_ID)
         if not found_customer:
             raise ValueError("No such customer exists!")
         customers.remove(found_customer)
-    elif enitity == 'booking':
+    elif entity == 'booking':
         remove_ID = input(f"Please provide booking ID: ")
         found_booking = find_booking(remove_ID)
 
@@ -126,8 +141,8 @@ def add_entity(entity):
         to_date = input("Give to date: ")
         customer_ID = input("Give customer ID: ")
         found_customer = find_customer(customer_ID)
-        address_id = input("Give address id: ")
-        found_address = find_address(address_id)
+        address_ID = input("Give address ID: ")
+        found_address = find_address(address_ID)
         booking = Booking(booking_ID, created_at_date, from_date, to_date, found_customer, found_address)
         bookings.append(booking)
 def find_booking(booking_ID):
@@ -226,11 +241,7 @@ def generate_data():
 
 run_menu()
 
-# TODO Kan också lägga till statistik också, antal ockuperade rum i byggnaden tex, antal customers och så vidare. pric etc plus sortering tex på customer name
 # TODO i mån av tid
-# Bryt ut till en BookingRepository med CRUD funktionalitet
+# BookingRepository with CRUD functionality
 
-# TODO extra funtkiolitet i mån av tid !
-
-# add depending on the dates
-# om det sepcifika rummet ej bokat under den tiden
+# TODO add depending on the dates, when one room is free etc
