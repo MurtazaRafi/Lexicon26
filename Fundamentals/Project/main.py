@@ -13,13 +13,7 @@ bookings = []
 def run_menu():
     while (True):
         print("------------------------------------------------------------------------------------------")
-        print(f"""MAIN MENU: Please choose an option:
-        0. Quit menu
-        1. Add information
-        2. Remove information
-        3. See current status
-        4. Generate test data
-        5. Show statistics""")
+        print(f"""MAIN MENU: Please choose an option: \n0. Quit menu \n1. Add information \n2. Remove information \n3. See current status \n4. Generate test data \n5. Show statistics""")
 
         main_menu_input = input()
 
@@ -39,9 +33,9 @@ def run_menu():
 
 def remove():
     print(f"""What do you want to remove?
-                1. Remove address
-                2. Remove customer
-                3. Remove a booking""")
+        1. Remove address
+        2. Remove customer
+        3. Remove a booking""")
     user_input = input()
     entity = get_by_choice(user_input)
     remove_entity(entity)
@@ -68,9 +62,9 @@ def show_info():
 
 def add():
     print(f"""What do you want to add?
-            1. Add address
-            2. Add customer
-            3. Add a booking""")
+        1. Add address
+        2. Add customer
+        3. Add a booking""")
     user_input = input()
     entity = get_by_choice(user_input)
     add_entity(entity)
@@ -150,11 +144,18 @@ def add_entity(entity):
         to_date = input("Give to date: ")
         customer_ID = input("Give customer ID: ")
         found_customer = find_customer(customer_ID)
+
+        if not found_customer:
+            raise ValueError("You must provide a correct customer ID!")
+        
         address_ID = input("Give address ID: ")
         found_address = find_address(address_ID)
+        if not found_address:
+            raise ValueError("You must provide a correct address ID!")
+        
         booking = Booking(booking_ID, created_at_date, from_date, to_date, found_customer, found_address)
         bookings.append(booking)
-        
+
 def find_booking(booking_ID):
     for b in bookings:
         if str(b.booking_ID) == booking_ID:
@@ -251,7 +252,7 @@ def generate_data():
 
 run_menu()
 
-# TODO i mån av tid
+# TODO
 # BookingRepository with CRUD functionality
 
 # TODO add depending on the dates, when one room is free etc
