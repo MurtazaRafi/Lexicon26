@@ -3,7 +3,7 @@ class Floor:
     def __init__(self, floor_number, rooms = None):
         self.floor_number = floor_number
         if rooms is None:
-            self.rooms = [] # Kolla igen om rätt syntax
+            self.rooms = [] 
         else:
             self.rooms = rooms
         self.MAX_ROOMS = 10

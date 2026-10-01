@@ -27,44 +27,53 @@ def run_menu():
             case "0":
                 break
             case "1": 
-                print(f"""What do you want to add?
-            1. Add address
-            2. Add customer
-            3. Add a booking""")
-                user_input = input()
-                entity = get_by_choice(user_input)
-                add_entity(entity)
+                add()
             case "2":
-                print(f"""What do you want to remove?
-                1. Remove address
-                2. Remove customer
-                3. Remove a booking""")
-                user_input = input()
-                entity = get_by_choice(user_input)
-                remove_entity(entity)
+                remove()
             case "3":
-                print("See current status for: \n1. Addresses \n2. Buildings \n3. Customers \n4. Bookings")
-                view_input = input()
-                if view_input == "1":
-                    print("List  of current (occupied) addresses in the system: ")
-                    for address in addresses:
-                        print(address)
-                elif view_input == "2":
-                    previous_address = ""
-                    for address in addresses:
-                        print(address.get_building_info())
-                elif view_input == "3":
-                    print("List of current customers in the system: ")
-                    for customer in sorted(customers, key=lambda customer: customer.name):
-                        print(customer)
-                elif view_input == "4":
-                    print("List of current bookings in the system: ")
-                    for booking in bookings:
-                        print(booking)
+                show_info()
             case "4":
                 generate_data()
             case "5":
                 get_statistics()
+
+def remove():
+    print(f"""What do you want to remove?
+                1. Remove address
+                2. Remove customer
+                3. Remove a booking""")
+    user_input = input()
+    entity = get_by_choice(user_input)
+    remove_entity(entity)
+
+def show_info():
+    print("See current status for: \n1. Addresses \n2. Buildings \n3. Customers \n4. Bookings")
+    view_input = input()
+    if view_input == "1":
+        print("List  of current (occupied) addresses in the system: ")
+        for address in addresses:
+            print(address)
+    elif view_input == "2":
+        previous_address = ""
+        for address in addresses:
+            print(address.get_building_info())
+    elif view_input == "3":
+        print("List of current customers in the system: ")
+        for customer in sorted(customers, key=lambda customer: customer.name):
+            print(customer)
+    elif view_input == "4":
+        print("List of current bookings in the system: ")
+        for booking in bookings:
+            print(booking)
+
+def add():
+    print(f"""What do you want to add?
+            1. Add address
+            2. Add customer
+            3. Add a booking""")
+    user_input = input()
+    entity = get_by_choice(user_input)
+    add_entity(entity)
 
 def get_statistics():
     print("""Which of the following do you want to know statistical data about?: \n1. Addresses \n2. Customers \n3. Bookings \n4. Buildings""")
@@ -145,6 +154,7 @@ def add_entity(entity):
         found_address = find_address(address_ID)
         booking = Booking(booking_ID, created_at_date, from_date, to_date, found_customer, found_address)
         bookings.append(booking)
+        
 def find_booking(booking_ID):
     for b in bookings:
         if str(b.booking_ID) == booking_ID:
