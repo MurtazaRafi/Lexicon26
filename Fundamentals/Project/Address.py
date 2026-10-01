@@ -10,14 +10,17 @@ class Address:
         self.room = room
     def __str__(self):
         return f"{self.building}, Floor number: {self.floor}, room number: {self.room}"
-    def get_building_info(self):
+    
+    def get_building_floors(self):
         output = f"Occupied floors at building {self.building}: "
 
         for floor in self.building.floors:
             output += str(floor.floor_number) + " "
 
-        output += f"\nOccupied rooms at floor number {self.floor.floor_number}: "
-
+        return output
+    def get_building_rooms(self):
+        output = f"Occupied rooms at floor number {self.floor.floor_number}: "
+        
         for room in self.floor.rooms:
             output += str(room.room_number) + " "
 

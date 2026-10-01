@@ -48,9 +48,12 @@ def show_info():
         for address in addresses:
             print(address)
     elif view_input == "2":
-        previous_address = ""
+        previous_building_floors = ""
         for address in addresses:
-            print(address.get_building_info())
+            if address.get_building_floors() != previous_building_floors:
+                print(address.get_building_floors())
+            print(address.get_building_rooms())
+            previous_building_floors = address.get_building_floors()
     elif view_input == "3":
         print("List of current customers in the system: ")
         for customer in sorted(customers, key=lambda customer: customer.name):
