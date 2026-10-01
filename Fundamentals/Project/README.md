@@ -18,7 +18,7 @@ For each first three options you can add/remove/show info about the different da
 
 <img width="181" height="89" alt="image" src="https://github.com/user-attachments/assets/38487e9c-062f-4e49-975b-f501dc6d137d" />
 
-For example clicking 'bookings' will show the following information:
+For example clicking 'Bookings' will show the following information:
 
 <img width="371" height="365" alt="image" src="https://github.com/user-attachments/assets/3ea8f06d-441d-4af4-b434-e0fa2025b1de" />
 
