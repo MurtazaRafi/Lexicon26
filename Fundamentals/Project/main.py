@@ -48,6 +48,7 @@ def show_info():
         for address in addresses:
             print(address)
     elif view_input == "2":
+        # To avoid duplicate values
         previous_building_floors = ""
         for address in addresses:
             if address.get_building_floors() != previous_building_floors:
