@@ -2,7 +2,6 @@ from Building import Building
 from Floor import Floor
 from Room import Room
 
-
 class Address:
     def __init__(self, building : Building, address_ID, floor : Floor, room : Room):
         self.address_ID = address_ID
