@@ -34,9 +34,9 @@ DROP TABLE pets;
 CREATE TABLE orders(
 	order_id INTEGER PRIMARY KEY,
 	customer_id INTEGER NOT NULL,
-	orer_date TEXT NOT NULL,
+	order_date TEXT NOT NULL,
 	status TEXT NOT NULL DEFAULT 'new'
-			CHECK (status IN ('new', 'shipped', 'delivered', 'canceled')),
+			CHECK (status IN ('new', 'shipped', 'delivered', 'cancelled')),
 	FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
@@ -50,9 +50,6 @@ CREATE TABLE order_items (
 	FOREIGN KEY (order_id) REFERENCES orders(order_id),
 	FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
-
-ALTER TABLE orders
-RENAME COLUMN orer_date to order_date;
 
 
 INSERT INTO orders(order_id, customer_id, order_date)
@@ -90,6 +87,8 @@ CREATE TABLE reviews(
 --DROP TABLE reviews;
 
 INSERT INTO reviews (review_id, product_id, rating, comment)
-VALUES (2, 50, 5, "-");
+VALUES (2, 5, 5, "-");
+
+DROP TABLE orders;
 
 
