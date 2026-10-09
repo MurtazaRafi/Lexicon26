@@ -69,9 +69,6 @@
 SELECT c.first_name, o.order_id, o.order_date, o.status
 FROM customers c
 LEFT JOIN orders o ON o.customer_id = c.customer_id;
-
---kolla vfr ej fungerade helt --> 17 rader
-
  
  --9.
  
