@@ -59,14 +59,19 @@
  WHERE p.name = 'Hoodie Black';
  
  --8.
-SELECT c.first_name, p.name, o.order_id, o.order_date, o.status
-FROM products p
-LEFT JOIN order_items oi
-ON p.product_id = oi.product_id
-LEFT JOIN orders o
-ON o.order_id = oi.order_id
-LEFT JOIN customers c
-ON c.customer_id = o.customer_id;
+-- SELECT c.first_name, o.order_id, o.order_date, o.status
+-- FROM customers c
+-- LEFT JOIN orders o ON c.customer_id = o.customer_id
+-- LEFT JOIN order_items oi ON o.order_id = oi.order_id
+-- LEFT JOIN products p ON oi.product_id = p.product_id
+-- ORDER BY c.customer_id;
+
+SELECT c.first_name, o.order_id, o.order_date, o.status
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.customer_id;
+
+--kolla vfr ej fungerade helt --> 17 rader
+
  
  --9.
  
