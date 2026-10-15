@@ -15,7 +15,7 @@ customers = db.customers.find({"city" : "Göteborg"});
 
 for customer in customers:
     print(customer["first_name"], customer["last_name"])
-
+ 
 # 3.
 for product in db.products.find():
     print(product["name"], product["price"])

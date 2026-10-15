@@ -1,0 +1,73 @@
+# Queries and updates
+
+from datetime import datetime
+from pprint import pprint
+
+from pymongo import MongoClient
+client = MongoClient("mongodb://localhost:27017/")
+db = client["webshop"]
+
+# 1.
+products = db.products.find({"price": {"$gte": 1000}});
+
+for product in products:
+    print(product["name"], product["price"])
+
+# 2.
+orders = db.orders.find({"status": {"$ne": "delivered"}});
+for order in orders:
+    print(order["_id"], order["status"])
+
+# 3.
+customers = db.customers.find({"city": {"$in": ["Stockholm", "Malmö"]}});
+for customer in customers:
+    print(customer["first_name"], customer["last_name"], customer["city"])
+
+# 4.
+
+white_products = db.products.find({"details.color": "white"});
+
+for product in white_products:
+    print(product["name"], product["details"]["color"])
+
+# 5.
+sport = db.products.find({"tags": "sport"});
+for product in sport:
+    print(product["name"], product["tags"])
+
+# 6. 
+cheapest_5 = db.products.find().sort("price", 1).limit(5);
+
+for product in cheapest_5:
+    print(product["name"], product["price"])
+
+# 7.
+orders_2 = db.orders.find({"items.product_id": 2})
+for order in orders_2:  
+    pprint(order)  
+
+# 8.
+
+result = db.products.update_many({"category": "Accessories"}, {"$inc": {"price": 20}})
+
+print("Updated", result.modified_count, "products in Accessories category")
+
+res = db.products.find({"category": "Accessories"})
+for product in res:
+    print(product["name"], product["price"])
+
+# 9.
+
+db.products.update_one({"name": "Rain Jacket"}, {"$addToSet": {"tags": "new"}})
+
+rain_jacket = db.products.find_one({"name": "Rain Jacket"})
+print(rain_jacket["name"], rain_jacket["tags"])
+
+# 10.
+resultat = db.orders.find({"status": "new", "order_date": {"$lte": datetime(2026, 3, 20)}})
+
+print(len(list(resultat)), "orders with status 'new' and order_date <= 2026-03-20")
+
+db.orders.delete_many({"status": "new", "order_date": {"$lte": datetime(2026, 3, 20)}})
+
+
