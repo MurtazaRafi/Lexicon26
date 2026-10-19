@@ -41,8 +41,23 @@ for product in result2:
     pprint(product)
 
 # 6.
-db.customers.aggregate([{"$group" : 
-                       {"_id" : "$orders",
-                        "" : {"$sum" : 1}}},
-                        {"$sort" : {"city": -1}}])
+
+orders = db.orders.aggregate([
+   {
+      "$lookup": {
+         "from": "customers",
+         "localField": "customer_id",
+         "foreignField": "_id",
+         "as": "customer"
+      }},
+    {"$unwind": "$customer"},
+    {"$group": {"_id": "$customer",
+                "orders": {"$sum": 1}}},
+    {"$match" : {"orders" : {"$gte" : 2}}}
+])
+
+for order in orders:
+    pprint(order)
+
+# 7.
 
