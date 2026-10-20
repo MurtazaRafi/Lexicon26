@@ -2,7 +2,8 @@
 import requests
 from pprint import pprint
 from api_client import get_json
-
+from dotenv import load_dotenv
+import os
 
 # response = requests.get("https://fakestoreapi.com/products")
 
@@ -40,71 +41,76 @@ from api_client import get_json
 
 
 # 4. 
-new_product = {
-    "title": "Test product",
-    'price': 13.5,
-    'description': 'A product we create from Python',
-    'image': 'https://champion.se/thumb/916/2560x0/CHBR220_1.webp',
-    'category': 'electronics',
-}
+# new_product = {
+#     "title": "Test product",
+#     'price': 13.5,
+#     'description': 'A product we create from Python',
+#     'image': 'https://champion.se/thumb/916/2560x0/CHBR220_1.webp',
+#     'category': 'electronics',
+# }
 
-# POST
-response = requests.post("https://fakestoreapi.com/products", json=new_product)
+# # POST
+# response = requests.post("https://fakestoreapi.com/products", json=new_product)
+# print(response.status_code)
+# print(response.json())
+
+# # PATCH
+
+# response4 = requests.patch("https://fakestoreapi.com/products/7", json={'price': 49.0})
+
+# response = requests.get("https://fakestoreapi.com/products/7")
+
+# print(response4.json())
+
+# # Vfr ändras ej priset??? Maybe bec false api
+
+# print(get_json("https://api.github.com/users/octocat")["name"])
+# get_json("https://api.github.com/users/this-user-does-not-exist-123")
+# get_json("https://api.github.com/users/octocat", timeout=0.001)
+# get_json("https://this-domain-does-not-exist-abc123.com")
+# get_json("fakestoreapi.com/products")
+# get_json("https://example.com")
+
+
+# # LAB2
+# # 1. 2.
+# def find_city(name):
+#     try:
+#         coordinates = get_json("https://geocoding-api.open-meteo.com/v1/search", params={"name" : name, "count" : 1})
+#         latitude, longitude = coordinates["results"][0]["latitude"], coordinates["results"][0]["longitude"]
+#         return latitude, longitude
+#     except requests.exceptions.HTTPError as e:
+#         if e.response.status_code == 404:
+#             print("API returned a 404 error: Not Found")
+#         else:
+#             print("API returned an error:", e)
+#     except Exception as e:
+#         print("An error occurred:", e)
+
+
+# def get_weather(latitude, longitude):
+#     weather = get_json("https://api.open-meteo.com/v1/forecast", params={"latitude" : latitude , "longitude" : longitude, "current" : {"temperature_2m", "wind_speed_10m"}})
+#     temperature_2m = str(weather['current']['temperature_2m']) + ' ' + weather['current_units']['temperature_2m']
+#     wind_speed_10m = str(weather['current']['wind_speed_10m']) + ' ' + weather['current_units']['wind_speed_10m']
+#     return temperature_2m, wind_speed_10m
+
+# # 3.
+
+# name = input("Give a city: ")
+# latitude, longitude = find_city(name)
+# temp, wind = get_weather(latitude, longitude)
+# print(latitude)
+# print(f"{name}, Sweden: {temp}, wind {wind}.")
+
+# # 4.
+
+# LAB3
+load_dotenv()
+token = os.getenv("GITHUB_TOKEN")
+headers = {"Authorization": f"Bearer {token}"}
+
+response = requests.get("https://api.github.com/users/MurtazaRafi/repos", params = {"sort" : "pushed", "per_page" : 5}, headers = headers)
 print(response.status_code)
-print(response.json())
-
-# PATCH
-
-response4 = requests.patch("https://fakestoreapi.com/products/7", json={'price': 49.0})
-
-response = requests.get("https://fakestoreapi.com/products/7")
-
-print(response4.json())
-
-# Vfr ändras ej priset??? Maybe bec false api
-
-print(get_json("https://api.github.com/users/octocat")["name"])
-get_json("https://api.github.com/users/this-user-does-not-exist-123")
-get_json("https://api.github.com/users/octocat", timeout=0.001)
-get_json("https://this-domain-does-not-exist-abc123.com")
-get_json("fakestoreapi.com/products")
-get_json("https://example.com")
-
-
-# LAB2
-# 1. 2.
-def find_city(name):
-    try:
-        coordinates = get_json("https://geocoding-api.open-meteo.com/v1/search", params={"name" : name, "count" : 1})
-        latitude, longitude = coordinates["results"][0]["latitude"], coordinates["results"][0]["longitude"]
-        return latitude, longitude
-    except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 404:
-            print("API returned a 404 error: Not Found")
-        else:
-            print("API returned an error:", e)
-    except Exception as e:
-        print("An error occurred:", e)
-
-
-def get_weather(latitude, longitude):
-    weather = get_json("https://api.open-meteo.com/v1/forecast", params={"latitude" : latitude , "longitude" : longitude, "current" : {"temperature_2m", "wind_speed_10m"}})
-
-    temperature_2m = str(weather['current']['temperature_2m']) + ' ' + weather['current_units']['temperature_2m']
-
-    wind_speed_10m = str(weather['current']['wind_speed_10m']) + ' ' + weather['current_units']['wind_speed_10m']
-
-    return temperature_2m, wind_speed_10m
-
-# 3.
-
-name = input("Give a city: ")
-latitude, longitude = find_city(name)
-temp, wind = get_weather(latitude, longitude)
-print(latitude)
-print(f"{name}, Sweden: {temp}, wind {wind}.")
-
-# 4.
-
+print(response.json()['login'])
 
 
