@@ -1,3 +1,5 @@
+from pydantic import BaseModel
+
 from api_client import get_json
 import requests
 
@@ -13,4 +15,3 @@ print(response.status_code, response.json())
 
 get_json(f"{BASE}/movies/99")
 
-# Part 2

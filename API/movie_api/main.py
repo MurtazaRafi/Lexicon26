@@ -57,3 +57,25 @@ def delete_movie(movie_id: int):
     existing = find_movie(movie_id)
     movies.remove(existing)
 
+# Part 2
+
+class MovieUpdate(BaseModel):
+    title: str | None = None
+    director: str | None = None
+    year: int | None = None
+
+@app.patch("/movies/{movie_id}")
+def update_movie(movie_id: int, changes: MovieUpdate):
+    movie = find_movie(movie_id)
+    update_data = changes.model_dump(exclude_unset=True)
+
+    for key, val in update_data.items():
+        movie[key] = val
+
+    return movie
+
+# 3. 
+# 422 and 404
+
+# 4.
+# Put for updating is needed for all the fields and patch for only some field
