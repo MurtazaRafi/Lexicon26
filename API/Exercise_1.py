@@ -108,9 +108,22 @@ import os
 load_dotenv()
 token = os.getenv("GITHUB_TOKEN")
 headers = {"Authorization": f"Bearer {token}"}
+username = input("Provide username: ")
+response = get_json(f"https://api.github.com/users/{username}/repos", params = {"sort" : "pushed", "per_page" : 5}, headers = headers)
 
-response = requests.get("https://api.github.com/users/MurtazaRafi/repos", params = {"sort" : "pushed", "per_page" : 5}, headers = headers)
-print(response.status_code)
-print(response.json()['login'])
+# for repo in response:
+#     print(repo['name'])
 
 
+response2 = requests.get(f"https://api.github.com/users/{username}/repos", params = {"sort" : "pushed", "per_page" : 5}, headers = headers)
+
+#print(response2.headers['X-RateLimit-Limit'])
+
+# 5.
+# Bad credentials with wrong token 401
+
+
+# 401 not authorized, means not logged in
+# Forbidden, something that that user is not allowed to have access to!
+
+# 6.

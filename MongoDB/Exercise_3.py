@@ -61,3 +61,30 @@ for order in orders:
 
 # 7.
 
+orders = db.orders.aggregate([
+   { "$project": {
+        "items": 1, 
+        "items_count" : {"$size" : "$items"}
+    }}
+])
+
+for order in orders:
+    print(order["_id"], order["items_count"])
+# 8.
+
+units_by_category = db.orders.aggregate([
+    {"$unwind": "$items"},
+    {
+      "$lookup": {
+         "from": "products",
+         "localField": "items.product_id",
+         "foreignField": "_id",
+         "as": "product_info"
+      }},
+    {"$unwind": "$product_info"},
+    {"$group": {"_id": "$product_info.category",
+            "total_units_sold": { "$sum": "$items.quantity" }}}
+])
+
+for category in units_by_category:
+    pprint(category)
